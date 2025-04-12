@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a; /* Dark background */
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            background-color: #1a1a2e; /* Dark blue */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            color: #00ffff; /* Light cyan */
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0af; /* Neon blue on hover */
+        }
+
+        /* Home Section Styles */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+
+        #home:hover {
+            transform: scale(1.01); /* Slightly enlarge the section on hover */
+        }
+
+        #photo {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 20px 0;
+            box-shadow: 0 0 30px rgba(1, 300, 300, 1.0), 0 0 40px rgba(1, 300, 300, 1.0); /* Light cyan glow */
+            transition: transform 0.6s ease, box-shadow 0.6s ease; /* Added transition for box-shadow */
+        }
+
+        #photo:hover {
+            transform: scale(1.1); /* Slightly enlarge the image on hover */
+            box-shadow: 0 0 30px rgba(1, 300, 300, 1), 0 0 60px rgba(1, 300, 300, 1.0); /* Enhanced glow on hover */
+        }
+
+        #home h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #00ffff; /* Light cyan for headings */
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        #home h1:hover {
+            color: #0af; /* Change color on hover */
+        }
+
+        #home .title {
+            font-size: 24px;
+            color: #aaa;
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        #home .title:hover {
+            color: #fff; /* Change color on hover */
+        }
+
+        .section {
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #00ffff; /* Light cyan for headings */
+        }
+
+        .title {
+            font-size: 24px;
+            color: #aaa;
+        }
+
+        .dynamic-role {
+            color: #00ffff;
+            animation: fadeIn 2s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            /* Removed background color and border */
+            padding: 30px;
+            transition: transform 0.3s; /* Keep the transition for hover effect */
+        }
+
+        .about:hover {
+            transform: scale(1.02);
+        }
+
+        .about img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-right: 30px;
+            transition: transform 0.3s;
+        }
+
+        .about img:hover {
+            transform: scale(1.1);
+        }
+
+        .about h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .about h2 {
+            margin-top: 10px;
+            font-size: 1.8em;
+            color: #007bff;
+        }
+
+        .about p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+
+        .resume-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .resume-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Skills Section Styles */
+        .skills {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .skills-container {
+            width: 100%;
+            max-width: 400px; /* Adjust width as needed */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #8bf3ff; /* Light neon blue for the heading */
+            text-shadow: 0 0 5px #8bf3ff; /* Reduced glowing effect */
+        }
+
+        .skill-row {
+            margin: 10px 0; /* Increased margin for one line space */
+        }
+
+        .skill-name {
+            color: #fff; /* White for skill names */
+            font-weight: normal; /* Reduced font weight */
+            margin-bottom: 10px;
+            text-shadow: 0 0 3px #8bf3ff; /* Reduced glowing effect */
+        }
+
+        .bar {
+            background-color: #00ffff; /* Light cyan for the skill bar */
+            height: 10px; /* Slightly reduced height */
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            width: 0; /* Start width at 0 for animation */
+            transition: width 0.3s;
+            animation: grow 1s forwards; /* Apply animation */
+            box-shadow: 0 0 5px #00ffff; /* Reduced neon glow effect */
+        }
+
+        /* Add hover effect for technical skills */
+        .bar:hover {
+            background-color: #0af; /* Change to a different color on hover */
+            box-shadow: 0 0 10px #0af; /* Add a glow effect */
+        }
+
+        .label {
+            position: absolute;
+            left: 50%; /* Center the label */
+            transform: translateX(-50%); /* Adjust for centering */
+            color: #fff; /* White for labels */
+            font-weight: normal; /* Reduced font weight */
+            font-size: 12px;
+        }
+
+        /* Animation keyframes */
+        @keyframes grow {
+            from {
+                width: 0;
+            }
+            to {
+                width: var(--bar-width); /* Use a custom property */
+            }
+        }
+
+        /* Professional Skills Section Styles */
+        .skills-professional {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center align */
+        }
+
+        .professional-heading {
+            margin-bottom: 20px; /* Space below the heading */
+            font-size: 24px; /* Adjust font size as needed */
+            font-weight: bold;
+            color: #00ffff; /* Neon color for heading */
+        }
+
+        .skill-circle-container {
+            display: flex; /* Use flex for the circle container */
+            justify-content: center; /* Center circles */
+            flex-wrap: wrap; /* Wrap to the next line */
+        }
+
+        .skill-circle {
+            width: 100px; /* Circle size */
+            height: 100px; /* Circle size */
+            position: relative;
+            margin: 20px; /* Space around circles */
+        }
+
+        /* Add hover effect for professional skills */
+        .skill-circle:hover {
+            transform: scale(1.1); /* Slightly enlarge the circle on hover */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#00ffff 0% var(--percent), #333 var(--percent) 100%);
+            box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff, 0 0 45px #00ffff, 0 0 60px #00ffff;
+        }
+
+        .inner-circle {
+            width: 80%;
+            height: 80%;
+            background-color: #1a1a2e;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px; /* Adjusted font size */
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+        }
+
+        .skill-label {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center; /* Center align the label */
+        }
+
+        /* Projects Section Styles */
+        .project-container {
+            display: flex;
+            overflow-x: auto; /* Enables horizontal scrolling */
+            padding: 10px; /* Reduced padding */
+            gap: 10px; /* Reduced gap */
+            scrollbar-width: thin; /* For Firefox */
+        }
+
+        .project-container::-webkit-scrollbar {
+            height: 8px; /* Height of the scrollbar */
+        }
+
+        .project-container::-webkit-scrollbar-thumb {
+            background: #00ffff; /* Color of the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+        }
+
+        .project-container::-webkit-scrollbar-track {
+            background: #1a1a2e; /* Color of the scrollbar track */
+        }
+
+        .project-item {
+            background-color: #1a1a2e; /* Dark blue */
+            border-radius: 10px;
+            min-width: 250px; /* Reduced min-width */
+            flex: 1;
+            max-width: 300px; /* Reduced max-width */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-item img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Modal Styles for Project Description */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal #projectDescription {
+            background-color: #2a2a2a;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .button {
+            background-color: #00aaff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #008fcc;
+        }
+
+        /* Certifications Section Styles */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Reduced min-width */
+            gap: 15px; /* Reduced gap */
+        }
+
+        .certification-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            min-width: 200px; /* Reduced min-width */
+        }
+
+        .certification-card:hover {
+            transform: scale(1.05);
+        }
+
+        .certification-card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .certification-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 30, 47, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .certification-card:hover .certification-info {
+            opacity: 1;
+        }
+
+        /* Coding Platforms Section Styles */
+        .platform-title {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .platform-item {
+            display: inline-block; /* Aligns items in a row */
+            text-align: center; /* Centers text below icons */
+            margin: 0 30px; /* Space between icons */
+            transition: transform 0.8s; /* Smooth transition for scaling */
+        }
+
+        .platform-item:hover {
+            transform: scale(1.1); /* Slightly enlarge the item on hover */
+        }
+
+        .platform-icon {
+            text-decoration: none; /* Removes underline from links */
+            color: #00ffff; /* Icon color */
+        }
+
+        .platform-name {
+            display: block; /* Ensures names are below the icons */
+            margin-top: 10px; /* Space between icon and name */
+            font-size: 20px; /* Adjust font size as needed */
+            color: #ffffff; /* Adjust text color */
+        }
+
+        .platform-icon img {
+            display: inline-block; /* Ensures icons are treated as inline elements */
+        }
+
+        /* Social Media Section Styles */
+        #social-media {
+            margin-top: 100px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .social-icons a {
+            transition: transform 0.8s, color 0.3s; /* Smooth transition for scaling and color */
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1); /* Slightly enlarge the icon on hover */
+            color: #0af; /* Change color on hover */
+        }
+
+      
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a onclick="scrollToSection('home')">Home</a>
+        <a onclick="scrollToSection('about')">About</a>
+        <a onclick="scrollToSection('skills')">Skills</a>
+        <a onclick="scrollToSection('certifications')">Certifications</a>
+        <a onclick="scrollToSection('coding-platforms')">Coding Platforms</a>
+    </nav>
+
+    <!-- Home Section -->
+    <div id="home" class="section container">
+        <img id="photo" src="image/Anisha.jpg" alt="Your Photo">
+        <h1>Hello, It's Me<br> ANISHA S</h1>
+        <p class="title">And I'm a <span class="dynamic-role">Cloud developer</span></p>
+    </div>
+
+    <div class="container">
+        <div class="about">
+            <img src="image/Anisha.jpg" alt="Profile Photo">
+            <div>
+                <h1>About Me</h1>
+                <p>
+                    A passionate programmer with a strong foundation in data structures, algorithms, and problem-solving.<br>
+ I enjoy turning ideas into efficient code and love challenges that sharpen my logical thinking.<br>
+  Skilled in writing clean, maintainable code and exploring new technologies with curiosity. <br>
+  I thrive in environments that push creativity, consistency, and growth—always striving 
+  to improve, innovate, and make an impact through technology.
+
+---
+                </p>
+                <button class="resume-button" onclick="viewResume()">View Resume</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="section">
+        <h2>My Skills</h2>
+        <div class="skills">
+            <div class="skills-container">
+                <h2>Technical Skills</h2>
+                <div class="skill-row">
+                    <span class="skill-name">C</span>
+                    <div class="bar" style="--bar-width: 90%; width: 90%;">
+                        <span class="label">80%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">C++</span>
+                    <div class="bar" style="--bar-width: 90%; width: 90%;">
+                        <span class="label">80%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">Java</span>
+                    <div class="bar" style="--bar-width: 100%; width: 100%;">
+                        <span class="label">100%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">Python</span>
+                    <div class="bar" style="--bar-width: 90%; width: 90%;">
+                        <span class="label">80%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">HTML</span>
+                    <div class="bar" style="--bar-width: 90%; width: 90%;">
+                        <span class="label">80%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">CSS</span>
+                    <div class="bar" style="--bar-width: 80%; width: 80%;">
+                        <span class="label">80%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">JavaScript</span>
+                    <div class="bar" style="--bar-width: 70%; width: 70%;">
+                        <span class="label">60%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">Python</span>
+                    <div class="bar" style="--bar-width: 60%; width: 60%;">
+                        <span class="label">60%</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-name">React</span>
+                    <div class="bar" style="--bar-width: 75%; width: 75%;">
+                        <span class="label">50%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Certifications Section -->
+    <div id="certifications" class="section">
+        <h2>Certifications</h2>
+        <div class="grid-container">
+            <div class="certification-card">
+                <a href="https://drive.google.com/drive/folders/1LaID24EGFwbExJEK44l7pTs-njhN0bbS?usp=drive_link" target="blank" class="platform-icon"></a>
+              
+                </div>
+            </div>
+           
+
+    <!-- Coding Platforms Section -->
+    <div id="coding-platforms" class="section">
+        <h2 class="platform-title">Coding Platforms</h2>
+        <div>
+            <div class="platform-item">
+                <a href="https://leetcode.com/u/V1YRabyFAL/" target="blank" class="platform-icon">
+                    <img src="icon/leetcode.jpg" alt="LeetCode Logo" style="width: 50px; height: auto;">
+                </a>
+                <span class="platform-name">LeetCode</span>
+            </div>
+            <div class="platform-item">
+                <a href=" https://www.codechef.com/users/anishaani1804" target="blank" class="platform-icon">
+                    <img src="icon/icons8-codechef-48 (1).png" alt="CodeChef Logo" style="width: 50px; height: auto;">
+                </a>
+                <span class="platform-name">CodeChef</span>
+            </div>
+            <div class="platform-item">
+                <a href="https://www.hackerearth.com/@22csa04/" target="blank" class="platform-icon">
+                    <img src="icon/id1vDiJ8TC_1739114709928.png" alt="Hackerearth Logo" style="width: 50px; height: auto;">
+                </a>
+                <span class="platform-name">Hackerearth</span>
+            </div>
+            <div class="platform-item">
+                <a href="https://www.hackerrank.com/profile/22csa04" target="blank" class="platform-icon">
+                    <img src="icon/icons8-hackerrank-is-a-technology-company-that-focuses-on-competitive-programming-48.png" alt="HackerRank Logo" style="width: 50px; height: auto;">
+                </a>
+                <span class="platform-name">HackerRank</span>
+            </div>
+            <div class="platform-item">
+                <a href="https://www.geeksforgeeks.org/user/ajaysurucj2/" target="blank" class="platform-icon">
+                    <img src="icon/icons8-geeksforgeeks-96.jpg" alt="GeeksforGeeks Logo" style="width: 50px; height: auto;">
+                </a>
+                <span class="platform-name">GeeksForGeeks</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Section -->
+    <div id="social-media" class="section">
+        <h2>Connect with Me</h2>
+        <div class="social-icons" style="display: flex; justify-content: center; margin-top: 20px;">
+            <a href="https://github.com/Anisha-18/Anisha-18" target="_blank" style="margin: 0 15px;">
+                <i class="fab fa-github fa-2x" style="color: #00ffff;"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/anisha-s-757755259" target="_blank" style="margin: 0 15px;">
+                <i class="fab fa-linkedin fa-2x" style="color: #00ffff;"></i>
+            </a>
+            <a href="https://www.instagram.com/anisha._18/" target="_blank" style="margin: 0 15px;">
+                <i class="fab fa-instagram fa-2x" style="color: #00ffff;"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(imageUrl) {
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('certificationModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('certificationModal').style.display = 'none';
+        }
+
+       
+
+       
+
+        document.querySelectorAll('.skill-circle').forEach(circle => {
+            const percentage = circle.style.getPropertyValue('--percent');
+            const degree = (percentage / 100) * 360;
+            circle.querySelector('.circle').style.transform = `rotate(${degree}deg)`;
+        });
+
+        function viewResume() {
+            // Replace with the actual link to your resume
+            window.open('image/Anisha_resume.pdf', '_blank');
+        }
+    </script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmjoOS9ljNiFjgf30CTm6_1u1FyDQhFGE",
+      authDomain: "anisha-portfolio-3c480.firebaseapp.com",
+      projectId: "anisha-portfolio-3c480",
+      storageBucket: "anisha-portfolio-3c480.firebasestorage.app",
+      messagingSenderId: "798205576758",
+      appId: "1:798205576758:web:9cd4adc5fa511d679cba97",
+      measurementId: "G-T4294ZZFTW"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  </body>
+  </html>
